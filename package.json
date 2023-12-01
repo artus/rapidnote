@@ -1,0 +1,52 @@
+{
+  "name": "rapidnote",
+  "version": "1.0.0",
+  "description": "An api that allows your to have ephemeral conversations",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "generate-swagger": "node ./swagger.js",
+    "build-and-run": "npm run generate-swagger && npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artus/rapidnote.git"
+  },
+  "keywords": [
+    "chat",
+    "rooms",
+    "free",
+    "api"
+  ],
+  "author": "artusvranken",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artus/rapidnote/issues"
+  },
+  "homepage": "https://github.com/artus/rapidnote#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "luxon": "^3.4.4",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "valivalue": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.10",
+    "@types/luxon": "^3.3.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.2"
+  }
+}

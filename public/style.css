@@ -1,0 +1,207 @@
+
+/* Import blox font */
+@font-face {
+  font-family: 'Blox';
+  src: url('./fonts/blox/Blox2.ttf') format('truetype');
+}
+
+/* Import vcr-osd-mono font */
+@font-face {
+  font-family: 'VcrOsdMono';
+  src: url('./fonts/vcr-osd-mono/VCR_OSD_MONO.ttf') format('truetype');
+}
+
+
+:root {
+  --gamboge: #EF9F32ff;
+  --smoky-black: #140E07ff;
+  --tigers-eye: #A96824ff;
+  --seal-brown: #672E00ff;
+  --bistre: #2F1D0Eff;
+
+  --border: 1px solid var(--gamboge);
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  height: calc(100vh - 2rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  background-color: var(--bistre);
+  color: var(--gamboge);
+
+  font-family: 'VcrOsdMono', monospace;
+}
+
+h1,
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+header,
+main,
+footer {
+  padding: 1rem;
+  border: var(--border);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--smoky-black);
+  align-items: center;
+  font-family: 'Blox', monospace;
+}
+
+header nav ul {
+  list-style: none
+}
+
+header nav ul li a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: var(--smoky-black)
+}
+
+header nav ul li a:hover {
+  color: var(--gamboge)
+}
+
+main {
+  flex-grow: 1;
+
+  gap: 1rem;
+  display: flex;
+}
+
+main>div {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+main>div section {
+  flex-grow: 1;
+}
+
+main section,
+main form {
+  border: 2px solid var(--gamboge);
+  padding: 0.5rem;
+  background-color: var(--smoky-black);
+}
+
+main section {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+main section h2 {
+  height: 2rem;
+}
+
+footer {
+  background-color: var(--smoky-black);
+}
+
+#room-list,
+#message-list {
+  background-color: var(--seal-brown);
+  border: var(--border);
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+li {
+  padding: 0.5rem;
+  background-color: var(--gamboge);
+  color: var(--smoky-black);
+  cursor: pointer;
+}
+
+
+li:nth-of-type(even) {
+  background-color: var(--tigers-eye);
+}
+
+li:hover {
+  background-color: var(--bistre);
+  color: var(--gamboge)
+}
+
+#create-room-form {
+  display: flex;
+  gap: 0.5rem;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#create-room-form input {
+  flex-grow: 1;
+  background-color: var(--seal-brown);
+  color: var(--gamboge);
+  border: var(--border)
+}
+
+button {
+  border: var(--border);
+  background-color: var(--gamboge);
+  color: var(--smoky-black);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--tigers-eye);
+  color: var(--smoky-black);
+}
+
+#create-room-form button {
+  width: 5rem;
+}
+
+#add-message-form {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: 2fr 0.4fr;
+  gap: 0.5rem;
+  height: 4rem;
+}
+
+.form-control {
+  grid-column: 1 / 2;
+}
+
+.form-control:last-of-type {
+  grid-row: 2/3
+}
+
+.form-control {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.form-control label {
+  width: 5rem;
+}
+
+.form-control input {
+  flex-grow: 1;
+  border: var(--border);
+  background-color: var(--seal-brown);
+  color: var(--gamboge);
+}
+
+form button {
+  grid-row: 1 / 3;
+}

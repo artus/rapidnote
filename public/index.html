@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapidnote</title>
+  <script src="code.js" defer></script>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Rapidnote</h1>
+    <nav>
+      <ul>
+        <li><a href="/api-docs">API DOCS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="left">
+      <h2>Rooms <span id="room-count"></span></h2>
+        <ul id="room-list">
+          Loading...
+        </ul>
+      <form id="create-room-form">
+        <input id="room" type="text" placeholder="Room name">
+        <button type="submit">Create</button>
+      </form>
+    </section>
+    <div id="right">
+      <section>
+        <h2>Conversation in room '<span id="active-room">root</span>'</h2>
+          <ul id="message-list">
+            <li>Loading...</li>
+          </ul>
+      </section>
+      <form id="add-message-form">
+        <div class="form-control">
+          <label for="username">Username:</label>
+          <input id="username" type="text">
+        </div>
+        <div class="form-control">
+          <label for="message">Message:</label>
+          <input id="message" type="text">
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>&copy; Rapidnote</footer>
+</body>
+
+</html>
