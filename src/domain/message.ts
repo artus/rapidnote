@@ -1,6 +1,5 @@
 import { DateTime } from "luxon";
 import validator from "valivalue";
-import { validateNoForbiddenContent } from "./filters";
 
 export interface InMessageDTO {
   content: string;
@@ -27,9 +26,6 @@ export class Message {
     validator.strings.validateMinAndMaxLength(content, 1, 140, "Content must be between 1 and 140 characters long.");
     validator.strings.validateMinAndMaxLength(username, 1, 20, "Username must be between 1 and 20 characters long.");
     validator.objects.validateNotNullOrUndefined(timestamp, "Timestamp must be provided.");
-
-    validateNoForbiddenContent(content);
-    validateNoForbiddenContent(username);
   }
 
   static fromDTO(dto: InMessageDTO, id: number): Message {

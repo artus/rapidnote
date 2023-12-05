@@ -171,7 +171,18 @@ const fetchMessages = async () => {
         const messageElement = document.createElement("li");
         messageElement.classList.add("list-item");
         messageElement.title = `Sent: ${message.timestamp}`;
-        messageElement.innerHTML = `<span class="username">${message.username}:</span> <span class="message">${message.content}</span>`;
+
+        const usernameElement = document.createElement("span");
+        usernameElement.classList.add("username");
+        usernameElement.textContent = message.username;
+
+        const messageContentElement = document.createElement("span");
+        messageContentElement.classList.add("message");
+        messageContentElement.textContent = message.content;
+
+        messageElement.appendChild(usernameElement);
+        messageElement.appendChild(messageContentElement);
+
         messageElement.addEventListener("click", () => {
           document.getElementById("message").value = `@${message.username}:`;
           document.getElementById("message").focus();
