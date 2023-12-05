@@ -1,4 +1,3 @@
-
 /* Import blox font */
 @font-face {
   font-family: 'Blox';
@@ -204,4 +203,27 @@ button:hover {
 
 form button {
   grid-row: 1 / 3;
+}
+
+#toast-container {
+  position: absolute;
+  width: 20rem;
+  bottom: 2rem;
+  right: 3rem;
+  z-index: 1;
+}
+
+.toast {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--smoky-black);
+  color: var(--gamboge);
+  border: var(--border);
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.toast:hover {
+  transform: scale(1.1);
 }

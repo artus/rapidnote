@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from "cors";
 import rateLimit from 'express-rate-limit';
@@ -11,23 +11,86 @@ import dotenv from 'dotenv';
 dotenv.config();
 const port = process.env.PORT || 3000;
 
+const limiterMs = (() => {
+  if (process.env.LIMITER_MS) {
+    return parseInt(process.env.LIMITER_MS);
+  } else {
+    return 5 * 60 * 1000;
+  }
+})();
+
+const limiterMax = (() => {
+  if (process.env.LIMITER_MAX) {
+    return parseInt(process.env.LIMITER_MAX);
+  } else {
+    return 1000;
+  }
+})();
+
+const serveApiDocs = (() => {
+  if (process.env.SERVE_API_DOCS) {
+    return process.env.SERVE_API_DOCS === 'true';
+  } else {
+    return true;
+  }
+})();
+
+const servePublic = (() => {
+  if (process.env.SERVE_PUBLIC) {
+    return process.env.SERVE_PUBLIC === 'true';
+  } else {
+    return true;
+  }
+})();
+
+console.log("Starting up with the following configuration:");
+console.log(`PORT: ${port}`);
+console.log(`LIMITER_MS: ${limiterMs}`);
+console.log(`LIMITER_MAX: ${limiterMax}`);
+console.log(`SERVE_API_DOCS: ${serveApiDocs}`);
+console.log(`SERVE_PUBLIC: ${servePublic}`);
+
 const app = express();
 
 // Limiter that rate limits to 1000 requests every 5 minutes.
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 1000, // limit each IP to 1000 requests per windowMs,
+  windowMs: limiterMs,
+  max: limiterMax,
+  handler: (req: Request, res: Response) => {
+    res.status(429).json({ error: 'Too many requests, please try again later.' });
+  }
 });
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors())
 app.use(limiter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+if (serveApiDocs) {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+}
+
+if (servePublic) {
+  app.use(express.static('public'))
+}
 
 const rooms = new Rooms();
 
-app.use(express.static('public'))
+
+function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
+  if (res.headersSent) {
+    return next(error)
+  }
+
+  if (error.message.includes('must')) {
+    return res.status(400).json({ error: error.message })
+  } else if (error.message.includes('exist')) {
+    return res.status(404).json({ error: error.message })
+  } else if (error.message.includes('maximum') || error.message.includes('allowed')) {
+    return res.status(403).json({ error: error.message });
+  } else {
+    return res.status(500).json({ error: error.message })
+  }
+}
 
 /**
  * @openapi
@@ -99,6 +162,8 @@ app.post('/rooms/:room?', (req: Request, res: Response) => {
   res.json(roomDTO);
 });
 
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server is listening to ${port}`);

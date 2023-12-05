@@ -108,7 +108,7 @@ export class Rooms {
 
   getRoomDTO(room = DEFAULT_ROOM) {
     if (!this.roomExists(room)) {
-      throw new Error(`Room ${room} does not exist.`);
+      throw new Error(`Room '${room}' does not exist.`);
     }
     return this.getRoom(room)!.toDTO();
   }
