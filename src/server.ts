@@ -23,7 +23,7 @@ const limiterMax = (() => {
   if (process.env.LIMITER_MAX) {
     return parseInt(process.env.LIMITER_MAX);
   } else {
-    return 1000;
+    return 100;
   }
 })();
 

@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+<div id="toast-container">
+</div>
+
+
 <body>
   <header>
     <h1>Rapidnote</h1>
@@ -19,16 +23,12 @@
       </ul>
     </nav>
   </header>
-
-  <div id="toast-container">
-  </div>
-
   <main>
     <section id="left">
       <h2>Rooms <span id="room-count"></span></h2>
-        <ul id="room-list">
-          Loading...
-        </ul>
+      <ul id="room-list">
+        Loading...
+      </ul>
       <form id="create-room-form">
         <input id="room" type="text" placeholder="Room name">
         <button type="submit">Create</button>
@@ -37,9 +37,9 @@
     <div id="right">
       <section>
         <h2>Conversation in room '<span id="active-room">root</span>'</h2>
-          <ul id="message-list">
-            <li>Loading...</li>
-          </ul>
+        <ul id="message-list">
+          <li>Loading...</li>
+        </ul>
       </section>
       <form id="add-message-form">
         <div class="form-control">

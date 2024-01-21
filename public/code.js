@@ -174,7 +174,7 @@ const fetchMessages = async () => {
 
         const usernameElement = document.createElement("span");
         usernameElement.classList.add("username");
-        usernameElement.textContent = message.username;
+        usernameElement.textContent = `${message.username}: `;
 
         const messageContentElement = document.createElement("span");
         messageContentElement.classList.add("message");
